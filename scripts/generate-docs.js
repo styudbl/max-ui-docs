@@ -2,7 +2,7 @@ const fs = require("fs").promises;
 const path = require("path");
 
 // Пути
-const SOURCE_PATH = "./source/max-ui/src/components";
+const SOURCE_PATH = "./source/max-ui/src";
 const OUTPUT_FILE = "./docs/MAX_UI_REFERENCE.md";
 
 // Рекурсивный поиск всех компонентов

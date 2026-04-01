@@ -1,6 +1,6 @@
 # 🎨 MAX UI: Полный справочник компонентов
 
-**Сгенерировано:** 2026-04-01T15:46:35.494Z
+**Сгенерировано:** 2026-04-01T20:06:14.897Z
 
 ## 📑 Оглавление
 
@@ -42,6 +42,7 @@
 - [TypographyHeadline](#typographyheadline)
 - [TypographyLabel](#typographylabel)
 - [TypographyTitle](#typographytitle)
+- [Profile](#profile)
 
 ---
 
@@ -417,6 +418,16 @@
 ## 📷 TypographyTitle
 
 **Путь:** `source\max-ui\src\components\Typography\parts\TypographyTitle`
+
+### Примеры (Stories)
+
+- Playground
+
+---
+
+## 📷 Profile
+
+**Путь:** `source\max-ui\src\compositions\Profile`
 
 ### Примеры (Stories)
 
