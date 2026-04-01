@@ -1,426 +1,863 @@
-# 🎨 MAX UI: Полный справочник компонентов
+# 📘 MAX UI Components Reference
 
-**Сгенерировано:** 2026-04-01T15:46:35.494Z
+Полная документация компонентов библиотеки MAX UI.
 
 ## 📑 Оглавление
 
-- [AvatarCloseButton](#avatarclosebutton)
-- [AvatarContainer](#avatarcontainer)
-- [AvatarIcon](#avataricon)
-- [AvatarImage](#avatarimage)
-- [AvatarOnlineDot](#avataronlinedot)
-- [AvatarOverlay](#avataroverlay)
-- [AvatarText](#avatartext)
-- [Button](#button)
-- [CellAction](#cellaction)
-- [CellHeader](#cellheader)
-- [CellInput](#cellinput)
-- [CellList](#celllist)
-- [CellSimple](#cellsimple)
-- [ClearableInput](#clearableinput)
-- [Container](#container)
-- [Counter](#counter)
-- [Dot](#dot)
-- [EllipsisText](#ellipsistext)
-- [Flex](#flex)
-- [Grid](#grid)
-- [IconButton](#iconbutton)
-- [Input](#input)
-- [MaxUI](#maxui)
-- [Panel](#panel)
-- [Ripple](#ripple)
-- [SearchInput](#searchinput)
-- [Spinner](#spinner)
-- [SvgButton](#svgbutton)
-- [Switch](#switch)
-- [Tappable](#tappable)
-- [Textarea](#textarea)
-- [ToolButton](#toolbutton)
-- [TypographyAction](#typographyaction)
-- [TypographyBody](#typographybody)
-- [TypographyDisplay](#typographydisplay)
-- [TypographyHeadline](#typographyheadline)
-- [TypographyLabel](#typographylabel)
-- [TypographyTitle](#typographytitle)
-
----
-
-## 📷 AvatarCloseButton
-
-**Путь:** `source\max-ui\src\components\Avatar\parts\AvatarCloseButton`
-
-### Примеры (Stories)
-
-- Playground
+### Avatar Components
+- [AvatarContainer](#-avatarcontainer)
+- [AvatarImage](#-avatarimage)
+- [AvatarIcon](#-avataricon)
+- [AvatarText](#-avatartext)
+- [AvatarOverlay](#-avataroverlay)
+- [AvatarOnlineDot](#-avataronlinedot)
+- [AvatarCloseButton](#-avatarclosebutton)
 
 ---
 
 ## 📷 AvatarContainer
 
-**Путь:** `source\max-ui\src\components\Avatar\parts\AvatarContainer`
+Контейнер для аватара, предоставляющий контекст размера дочерним компонентам и поддерживающий различные формы (круг, сквиркл).
 
-### Примеры (Stories)
+### 📦 Импорт
+```tsx
+import { Avatar } from '@max-ui/components';
+// или
+import { AvatarContainer } from '@max-ui/components/avatar';
+```
 
-- Playground
-- AsLink
+### 📋 Props
+| Prop | Тип | По умолчанию | Описание |
+|------|-----|--------------|----------|
+| `size` | `16 \| 20 \| 24 \| 28 \| 32 \| 36 \| 40 \| 44 \| 48 \| 54 \| 56 \| 64 \| 72 \| 80 \| 88 \| 96 \| number` | `48` | Размер аватара в пикселях |
+| `form` | `'circle' \| 'squircle'` | `'circle'` | Форма аватара: круг или сквиркл |
+| `overlay` | `ReactNode` | `undefined` | Контент оверлея поверх аватара |
+| `rightTopCorner` | `ReactNode` | `undefined` | Контент в правом верхнем углу |
+| `rightBottomCorner` | `ReactNode` | `undefined` | Контент в правом нижнем углу |
+| `innerClassNames` | `InnerClassNamesProp<AvatarContainerElementKey>` | `undefined` | Кастомные классы для внутренних элементов |
+| `asChild` | `boolean` | `false` | Использовать Slot для рендеринга как дочерний элемент |
 
----
+### 🎨 Примеры
 
-## 📷 AvatarIcon
+```tsx
+// Базовый пример с иконкой
+<Avatar.Container size={64} form="circle">
+  <Avatar.Icon>
+    <Icon24Placeholder />
+  </Avatar.Icon>
+</Avatar.Container>
+```
 
-**Путь:** `source\max-ui\src\components\Avatar\parts\AvatarIcon`
+```tsx
+// Аватар с изображением и fallback
+<Avatar.Container size={64}>
+  <Avatar.Image
+    src="https://example.com/avatar.jpg"
+    fallback="VT"
+    fallbackGradient="green"
+  />
+</Avatar.Container>
+```
 
-### Примеры (Stories)
+```tsx
+// Аватар с текстом и градиентом
+<Avatar.Container size={64}>
+  <Avatar.Text gradient="red">
+    VT
+  </Avatar.Text>
+</Avatar.Container>
+```
 
-- Playground
+```tsx
+// Аватар с оверлеем
+<Avatar.Container
+  size={64}
+  overlay={
+    <Avatar.Overlay>
+      <Icon24Placeholder />
+    </Avatar.Overlay>
+  }
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
+
+```tsx
+// Аватар как ссылка (asChild)
+<Avatar.Container asChild>
+  <a href="https://example.com" target="_blank" rel="noreferrer">
+    <Avatar.Icon>
+      <Icon24Placeholder />
+    </Avatar.Icon>
+  </a>
+</Avatar.Container>
+```
+
+```tsx
+// Аватар с кнопкой закрытия и индикатором онлайн
+<Avatar.Container
+  size={64}
+  rightTopCorner={<Avatar.CloseButton aria-label="Закрыть" />}
+  rightBottomCorner={<Avatar.OnlineDot />}
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
+
+### 🎨 CSS-переменные и классы
+
+**CSS-переменные:**
+- `--MaxUi-AvatarContainer_size` — размер контейнера
+- `--MaxUi-AvatarContainer__content_radius` — радиус скругления контента
+
+**Классы:**
+- `.AvatarContainer` — корневой класс
+- `.AvatarContainer_form_circle` — форма круга
+- `.AvatarContainer_form_squircle` — форма сквиркла
+- `.AvatarContainer__content` — контент контейнера
+- `.AvatarContainer__overlay` — оверлей
+- `.AvatarContainer__rightBottomCorner` — правый нижний угол
+- `.AvatarContainer__rightTopCorner` — правый верхний угол
+
+### 🔧 Типы TypeScript
+
+```ts
+type AvatarContainerSize = 16 | 20 | 24 | 28 | 32 | 36 | 40 | 44 | 48 | 54 | 56 | 64 | 72 | 80 | 88 | 96 | number;
+type AvatarContainerFrom = 'circle' | 'squircle';
+type AvatarContainerElementKey = 'overlay' | 'content' | 'rightBottomCorner' | 'rightTopCorner';
+
+interface AvatarContainerProps extends ComponentProps<'div'>, AsChildProp {
+  size?: AvatarContainerSize;
+  overlay?: ReactNode;
+  form?: AvatarContainerFrom;
+  innerClassNames?: InnerClassNamesProp<AvatarContainerElementKey>;
+  rightTopCorner?: ReactNode;
+  rightBottomCorner?: ReactNode;
+}
+```
+
+### 📱 Особенности
+
+- **Context**: Предоставляет `AvatarContainerContext` с размером для дочерних компонентов
+- **asChild**: Поддержка паттерна Slot через `@radix-ui/react-slot`
+- **Адаптивность**: Автоматический выбор размера иконок и текста на основе размера контейнера
+
+### ⚠️ Важно
+
+- Контекст размера необходим для корректной работы `AvatarText`, `AvatarOnlineDot` и `AvatarCloseButton`
+- При использовании `asChild` убедитесь, что дочерний элемент может принимать `ref` и `className`
+
+### 🔗 Связанные компоненты
+
+- [AvatarImage](#-avatarimage)
+- [AvatarIcon](#-avataricon)
+- [AvatarText](#-avatartext)
+- [AvatarOverlay](#-avataroverlay)
+- [AvatarOnlineDot](#-avataronlinedot)
+- [AvatarCloseButton](#-avatarclosebutton)
 
 ---
 
 ## 📷 AvatarImage
 
-**Путь:** `source\max-ui\src\components\Avatar\parts\AvatarImage`
+Компонент изображения аватара с автоматической обработкой ошибок загрузки и fallback на текст.
 
-### Примеры (Stories)
+### 📦 Импорт
+```tsx
+import { Avatar } from '@max-ui/components';
+// или
+import { AvatarImage } from '@max-ui/components/avatar';
+```
 
-- Playground
+### 📋 Props
+| Prop | Тип | По умолчанию | Описание |
+|------|-----|--------------|----------|
+| `fallback` | `ReactNode` | `undefined` | Контент для отображения при ошибке загрузки |
+| `fallbackGradient` | `AvatarTextGradient` | `'red'` | Градиент фона fallback-контейнера |
+| `src` | `string` | `undefined` | URL изображения |
+| `srcSet` | `string` | `undefined` | Атрибут srcset для responsive images |
+| `referrerPolicy` | `ReferrerPolicy` | `undefined` | Политика referrer для запроса изображения |
+
+### 🎨 Примеры
+
+```tsx
+// Базовое использование
+<Avatar.Container>
+  <Avatar.Image src="https://example.com/avatar.jpg" alt="User name" />
+</Avatar.Container>
+```
+
+```tsx
+// С fallback текстом
+<Avatar.Container>
+  <Avatar.Image
+    src="https://example.com/avatar.jpg"
+    fallback="VT"
+    fallbackGradient="green"
+  />
+</Avatar.Container>
+```
+
+```tsx
+// С кастомным fallback
+<Avatar.Container>
+  <Avatar.Image
+    src="https://example.com/avatar.jpg"
+    fallback={<Avatar.Icon><Icon24Placeholder /></Avatar.Icon>}
+  />
+</Avatar.Container>
+```
+
+```tsx
+// С разными градиентами fallback
+<Avatar.Container>
+  <Avatar.Image fallback="A" fallbackGradient="blue" />
+</Avatar.Container>
+<Avatar.Container>
+  <Avatar.Image fallback="B" fallbackGradient="purple" />
+</Avatar.Container>
+```
+
+```tsx
+// Responsive изображение
+<Avatar.Container>
+  <Avatar.Image
+    srcSet="small.jpg 48w, large.jpg 96w"
+    sizes="48px"
+    fallback="U"
+  />
+</Avatar.Container>
+```
+
+### 🎨 CSS-переменные и классы
+
+**Классы:**
+- `.AvatarImage` — корневой класс изображения
+
+### 🔧 Типы TypeScript
+
+```ts
+interface AvatarImageProps extends ComponentProps<'img'> {
+  fallback?: ReactNode;
+  fallbackGradient?: AvatarTextGradient;
+}
+
+type AvatarTextGradient = 'red' | 'orange' | 'green' | 'blue' | 'purple' | 'custom';
+```
+
+### 📱 Особенности
+
+- **Автоматический fallback**: При ошибке загрузки изображения автоматически отображается `AvatarText`
+- **Отслеживание статуса**: Использует хук `useImageLoadingStatus` для мониторинга загрузки
+- **Градиенты**: Поддержка предопределённых градиентов для fallback
+
+### ⚠️ Важно
+
+- Должен использоваться внутри `Avatar.Container` для корректного наследования размера
+- Fallback отображается только при статусе загрузки `'error'`
+
+### 🔗 Связанные компоненты
+
+- [AvatarContainer](#-avatarcontainer)
+- [AvatarText](#-avatartext)
 
 ---
 
-## 📷 AvatarOnlineDot
+## 📷 AvatarIcon
 
-**Путь:** `source\max-ui\src\components\Avatar\parts\AvatarOnlineDot`
+Контейнер для иконки внутри аватара с центрированием и стандартными стилями.
 
-### Примеры (Stories)
+### 📦 Импорт
+```tsx
+import { Avatar } from '@max-ui/components';
+// или
+import { AvatarIcon } from '@max-ui/components/avatar';
+```
 
-- Playground
+### 📋 Props
+| Prop | Тип | По умолчанию | Описание |
+|------|-----|--------------|----------|
+| Все props `<span>` | `ComponentProps<'span'>` | — | Стандартные HTML-атрибуты span |
 
----
+### 🎨 Примеры
 
-## 📷 AvatarOverlay
+```tsx
+// Базовая иконка
+<Avatar.Container>
+  <Avatar.Icon>
+    <Icon24Placeholder />
+  </Avatar.Icon>
+</Avatar.Container>
+```
 
-**Путь:** `source\max-ui\src\components\Avatar\parts\AvatarOverlay`
+```tsx
+// Иконка с кастомными стилями
+<Avatar.Container>
+  <Avatar.Icon style={{ backgroundColor: 'custom' }}>
+    <Icon24Placeholder />
+  </Avatar.Icon>
+</Avatar.Container>
+```
 
-### Примеры (Stories)
+```tsx
+// Иконка с className
+<Avatar.Container>
+  <Avatar.Icon className="custom-icon-class">
+    <Icon24Placeholder />
+  </Avatar.Icon>
+</Avatar.Container>
+```
 
-- Playground
+```tsx
+// Разные размеры иконок
+<Avatar.Container size={32}>
+  <Avatar.Icon><Icon16Placeholder /></Avatar.Icon>
+</Avatar.Container>
+<Avatar.Container size={64}>
+  <Avatar.Icon><Icon24Placeholder /></Avatar.Icon>
+</Avatar.Container>
+```
+
+```tsx
+// Иконка с оверлеем
+<Avatar.Container
+  overlay={
+    <Avatar.Overlay>
+      <Icon20Placeholder />
+    </Avatar.Overlay>
+  }
+>
+  <Avatar.Icon>
+    <Icon24Placeholder />
+  </Avatar.Icon>
+</Avatar.Container>
+```
+
+### 🎨 CSS-переменные и классы
+
+**CSS-переменные:**
+- `--background-accent-neutral-fade-secondary` — цвет фона
+- `--icon-quaternary` — цвет иконки
+
+**Классы:**
+- `.AvatarIcon` — корневой класс
+
+### 🔧 Типы TypeScript
+
+```ts
+interface AvatarIconProps extends ComponentProps<'span'> {}
+```
+
+### 📱 Особенности
+
+- **Центрирование**: Flexbox для центрирования содержимого
+- **Адаптивность**: Занимает 100% ширины и высоты контейнера
+
+### ⚠️ Важно
+
+- Рекомендуется использовать иконки соответствующего размера для текущего размера аватара
+
+### 🔗 Связанные компоненты
+
+- [AvatarContainer](#-avatarcontainer)
+- [AvatarImage](#-avatarimage)
 
 ---
 
 ## 📷 AvatarText
 
-**Путь:** `source\max-ui\src\components\Avatar\parts\AvatarText`
+Текстовый аватар с градиентным фоном и автоматическим подбором размера шрифта.
 
-### Примеры (Stories)
+### 📦 Импорт
+```tsx
+import { Avatar } from '@max-ui/components';
+// или
+import { AvatarText } from '@max-ui/components/avatar';
+```
 
-- Playground
+### 📋 Props
+| Prop | Тип | По умолчанию | Описание |
+|------|-----|--------------|----------|
+| `gradient` | `AvatarTextGradient` | `'red'` | Цвет градиента фона |
+| `children` | `ReactNode` | — | Текст для отображения |
 
----
+### 🎨 Примеры
 
-## 📷 Button
+```tsx
+// Базовый текстовый аватар
+<Avatar.Container>
+  <Avatar.Text>VT</Avatar.Text>
+</Avatar.Container>
+```
 
-**Путь:** `source\max-ui\src\components\Button`
+```tsx
+// Разные градиенты
+<Avatar.Container>
+  <Avatar.Text gradient="red">R</Avatar.Text>
+</Avatar.Container>
+<Avatar.Container>
+  <Avatar.Text gradient="green">G</Avatar.Text>
+</Avatar.Container>
+<Avatar.Container>
+  <Avatar.Text gradient="blue">B</Avatar.Text>
+</Avatar.Container>
+<Avatar.Container>
+  <Avatar.Text gradient="purple">P</Avatar.Text>
+</Avatar.Container>
+<Avatar.Container>
+  <Avatar.Text gradient="orange">O</Avatar.Text>
+</Avatar.Container>
+```
 
-### Примеры (Stories)
+```tsx
+// Кастомный градиент
+<Avatar.Container>
+  <Avatar.Text gradient="custom" style={{ background: 'linear-gradient(...)' }}>
+    C
+  </Avatar.Text>
+</Avatar.Container>
+```
 
-- Playground
-- AsLink
+```tsx
+// Разные размеры
+<Avatar.Container size={32}>
+  <Avatar.Text>XS</Avatar.Text>
+</Avatar.Container>
+<Avatar.Container size={64}>
+  <Avatar.Text>LG</Avatar.Text>
+</Avatar.Container>
+<Avatar.Container size={96}>
+  <Avatar.Text>XL</Avatar.Text>
+</Avatar.Container>
+```
 
----
+```tsx
+// С кастомными стилями
+<Avatar.Container>
+  <Avatar.Text className="custom-text" style={{ fontWeight: 700 }}>
+    Bold
+  </Avatar.Text>
+</Avatar.Container>
+```
 
-## 📷 CellAction
+### 🎨 CSS-переменные и классы
 
-**Путь:** `source\max-ui\src\components\CellAction`
+**CSS-переменные:**
+- `--text-contrast-static` — цвет текста
+- `--gradient-red` — красный градиент
+- `--gradient-orange` — оранжевый градиент
+- `--gradient-green` — зелёный градиент
+- `--gradient-blue` — синий градиент
+- `--gradient-purple` — фиолетовый градиент
 
-### Примеры (Stories)
+**Классы:**
+- `.AvatarText` — корневой класс
+- `.AvatarText_gradient_red` — красный градиент
+- `.AvatarText_gradient_orange` — оранжевый градиент
+- `.AvatarText_gradient_green` — зелёный градиент
+- `.AvatarText_gradient_blue` — синий градиент
+- `.AvatarText_gradient_purple` — фиолетовый градиент
+- `.AvatarText__in` — внутренний контейнер текста
 
-- Playground
-- AsLink
-- Ellipsized
+### 🔧 Типы TypeScript
 
----
+```ts
+type AvatarTextGradient = 'red' | 'orange' | 'green' | 'blue' | 'purple' | 'custom';
 
-## 📷 CellHeader
+interface AvatarTextProps extends ComponentProps<'span'> {
+  gradient?: AvatarTextGradient;
+}
+```
 
-**Путь:** `source\max-ui\src\components\CellHeader`
+### 📱 Особенности
 
-### Примеры (Stories)
+- **Автоматический размер шрифта**: На основе размера контейнера (от 6px до 30px)
+- **Градиенты**: 5 предопределённых градиентов + кастомный
+- **Font weight**: 600 (semi-bold) по умолчанию
 
-- Playground
+### ⚠️ Важно
 
----
+- Требует `Avatar.Container` для автоматического расчёта размера шрифта
+- Для `gradient="custom"` необходимо передать кастомный `background` через `style`
 
-## 📷 CellInput
+### 🔗 Связанные компоненты
 
-**Путь:** `source\max-ui\src\components\CellInput`
-
-### Примеры (Stories)
-
-- Playground
-
----
-
-## 📷 CellList
-
-**Путь:** `source\max-ui\src\components\CellList`
-
-### Примеры (Stories)
-
-- Playground
-
----
-
-## 📷 CellSimple
-
-**Путь:** `source\max-ui\src\components\CellSimple`
-
-### Примеры (Stories)
-
-- Playground
-- TappableCell
-- AsLink
-- EllipsizedTitle
-- EllipsizedSubtitle
-
----
-
-## 📷 ClearableInput
-
-**Путь:** `source\max-ui\src\components\ClearableInput`
-
----
-
-## 📷 Container
-
-**Путь:** `source\max-ui\src\components\Container`
-
-### Примеры (Stories)
-
-- Playground
-
----
-
-## 📷 Counter
-
-**Путь:** `source\max-ui\src\components\Counter`
-
-### Примеры (Stories)
-
-- Playground
-- CounterInButton
-
----
-
-## 📷 Dot
-
-**Путь:** `source\max-ui\src\components\Dot`
-
-### Примеры (Stories)
-
-- Playground
-- DotInButton
-
----
-
-## 📷 EllipsisText
-
-**Путь:** `source\max-ui\src\components\EllipsisText`
-
-### Примеры (Stories)
-
-- Playground
+- [AvatarContainer](#-avatarcontainer)
+- [AvatarImage](#-avatarimage)
 
 ---
 
-## 📷 Flex
+## 📷 AvatarOverlay
 
-**Путь:** `source\max-ui\src\components\Flex`
+Оверлей для отображения контента поверх аватара с полупрозрачным фоном.
 
-### Примеры (Stories)
+### 📦 Импорт
+```tsx
+import { Avatar } from '@max-ui/components';
+// или
+import { AvatarOverlay } from '@max-ui/components/avatar';
+```
 
-- Playground
+### 📋 Props
+| Prop | Тип | По умолчанию | Описание |
+|------|-----|--------------|----------|
+| `onClick` | `MouseEventHandler` | `undefined` | Обработчик клика |
+| Все props `<span>` | `ComponentProps<'span'>` | — | Стандартные HTML-атрибуты span |
 
----
+### 🎨 Примеры
 
-## 📷 Grid
+```tsx
+// Базовый оверлей с иконкой
+<Avatar.Container
+  overlay={
+    <Avatar.Overlay>
+      <Icon24Placeholder />
+    </Avatar.Overlay>
+  }
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
 
-**Путь:** `source\max-ui\src\components\Grid`
+```tsx
+// Оверлей с текстом
+<Avatar.Container
+  overlay={
+    <Avatar.Overlay>
+      <span>Edit</span>
+    </Avatar.Overlay>
+  }
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
 
-### Примеры (Stories)
+```tsx
+// Оверлей с обработчиком клика
+<Avatar.Container
+  overlay={
+    <Avatar.Overlay onClick={() => console.log('Overlay clicked')}>
+      <Icon24Placeholder />
+    </Avatar.Overlay>
+  }
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
 
-- Playground
+```tsx
+// Оверлей с несколькими элементами
+<Avatar.Container
+  overlay={
+    <Avatar.Overlay>
+      <Flex gap={8}>
+        <Icon24Placeholder />
+        <Icon24Placeholder />
+      </Flex>
+    </Avatar.Overlay>
+  }
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
 
----
+```tsx
+// Оверлей с кастомными стилями
+<Avatar.Container
+  overlay={
+    <Avatar.Overlay style={{ background: 'rgba(0,0,0,0.8)' }}>
+      <Icon24Placeholder />
+    </Avatar.Overlay>
+  }
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
 
-## 📷 IconButton
+### 🎨 CSS-переменные и классы
 
-**Путь:** `source\max-ui\src\components\IconButton`
+**CSS-переменные:**
+- `--background-overlay-secondary` — цвет фона оверлея
+- `--text-contrast-static` — цвет текста/иконок
 
-### Примеры (Stories)
+**Классы:**
+- `.AvatarOverlay` — корневой класс
 
-- Playground
-- AsLink
+### 🔧 Типы TypeScript
 
----
+```ts
+interface AvatarOverlayProps extends ComponentProps<'span'> {}
+```
 
-## 📷 Input
+### 📱 Особенности
 
-**Путь:** `source\max-ui\src\components\Input`
+- **Предотвращение кликов**: `onClick` предотвращает всплытие события по умолчанию
+- **Центрирование**: Flexbox для центрирования содержимого
+- **Полный размер**: Занимает 100% ширины и высоты контейнера
 
-### Примеры (Stories)
+### ⚠️ Важно
 
-- Playground
+- Передаётся через prop `overlay` в `Avatar.Container`
+- Использует переменную `--background-overlay-secondary` для фона
 
----
+### 🔗 Связанные компоненты
 
-## 📷 MaxUI
-
-**Путь:** `source\max-ui\src\components\MaxUI`
-
----
-
-## 📷 Panel
-
-**Путь:** `source\max-ui\src\components\Panel`
-
-### Примеры (Stories)
-
-- Playground
-- PrimaryExample
-- SecondaryExample
-
----
-
-## 📷 Ripple
-
-**Путь:** `source\max-ui\src\components\Ripple`
-
-### Примеры (Stories)
-
-- Playground
-
----
-
-## 📷 SearchInput
-
-**Путь:** `source\max-ui\src\components\SearchInput`
-
-### Примеры (Stories)
-
-- Playground
-
----
-
-## 📷 Spinner
-
-**Путь:** `source\max-ui\src\components\Spinner`
-
-### Примеры (Stories)
-
-- Playground
-
----
-
-## 📷 SvgButton
-
-**Путь:** `source\max-ui\src\components\SvgButton`
-
----
-
-## 📷 Switch
-
-**Путь:** `source\max-ui\src\components\Switch`
-
-### Примеры (Stories)
-
-- Playground
-- WithCell
-
----
-
-## 📷 Tappable
-
-**Путь:** `source\max-ui\src\components\Tappable`
-
----
-
-## 📷 Textarea
-
-**Путь:** `source\max-ui\src\components\Textarea`
-
-### Примеры (Stories)
-
-- Playground
+- [AvatarContainer](#-avatarcontainer)
+- [AvatarImage](#-avatarimage)
 
 ---
 
-## 📷 ToolButton
+## 📷 AvatarOnlineDot
 
-**Путь:** `source\max-ui\src\components\ToolButton`
+Индикатор онлайн-статуса пользователя в правом нижнем углу аватара.
 
-### Примеры (Stories)
+### 📦 Импорт
+```tsx
+import { Avatar } from '@max-ui/components';
+// или
+import { AvatarOnlineDot } from '@max-ui/components/avatar';
+```
 
-- Playground
-- AsLink
+### 📋 Props
+| Prop | Тип | По умолчанию | Описание |
+|------|-----|--------------|----------|
+| Все props `<span>` | `ComponentProps<'span'>` | — | Стандартные HTML-атрибуты span |
+
+### 🎨 Примеры
+
+```tsx
+// Базовый индикатор онлайн
+<Avatar.Container
+  rightBottomCorner={<Avatar.OnlineDot />}
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
+
+```tsx
+// С разными размерами аватара
+<Avatar.Container size={32} rightBottomCorner={<Avatar.OnlineDot />}>
+  <Avatar.Icon><Icon16Placeholder /></Avatar.Icon>
+</Avatar.Container>
+<Avatar.Container size={64} rightBottomCorner={<Avatar.OnlineDot />}>
+  <Avatar.Icon><Icon24Placeholder /></Avatar.Icon>
+</Avatar.Container>
+<Avatar.Container size={96} rightBottomCorner={<Avatar.OnlineDot />}>
+  <Avatar.Icon><Icon24Placeholder /></Avatar.Icon>
+</Avatar.Container>
+```
+
+```tsx
+// С кастомными стилями
+<Avatar.Container
+  rightBottomCorner={
+    <Avatar.OnlineDot style={{ '--dot-color': 'green' } as CSSProperties} />
+  }
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
+
+```tsx
+// С className
+<Avatar.Container
+  rightBottomCorner={<Avatar.OnlineDot className="custom-dot" />}
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
+
+```tsx
+// В комбинации с другими элементами
+<Avatar.Container
+  rightTopCorner={<Avatar.CloseButton aria-label="Закрыть" />}
+  rightBottomCorner={<Avatar.OnlineDot />}
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
+
+### 🎨 CSS-переменные и классы
+
+**CSS-переменные:**
+- `--icon-themed` — цвет точки
+- `--background-surface-primary` — цвет рамки вокруг точки
+
+**Классы:**
+- `.AvatarOnlineDot` — корневой класс
+- `.AvatarOnlineDot_size_xs` — размер XS (< 40px)
+- `.AvatarOnlineDot_size_s` — размер S (40-53px)
+- `.AvatarOnlineDot_size_m` — размер M (54-71px)
+- `.AvatarOnlineDot_size_l` — размер L (≥ 72px)
+- `.AvatarOnlineDot__dot` — сама точка
+
+### 🔧 Типы TypeScript
+
+```ts
+interface AvatarOnlineDotProps extends ComponentProps<'span'> {}
+```
+
+### 📱 Особенности
+
+- **Автоматический размер**: 4 размера (xs, s, m, l) на основе размера контейнера
+- **Контекст**: Использует `AvatarContainerContext` для определения размера
+- **Позиционирование**: Абсолютное позиционирование в правом нижнем углу
+
+### ⚠️ Важно
+
+- Должен использоваться внутри `Avatar.Container` для автоматического определения размера
+- Передаётся через prop `rightBottomCorner`
+
+### 🔗 Связанные компоненты
+
+- [AvatarContainer](#-avatarcontainer)
+- [AvatarCloseButton](#-avatarclosebutton)
 
 ---
 
-## 📷 TypographyAction
+## 📷 AvatarCloseButton
 
-**Путь:** `source\max-ui\src\components\Typography\parts\TypographyAction`
+Кнопка закрытия/удаления аватара в правом верхнем углу.
 
-### Примеры (Stories)
+### 📦 Импорт
+```tsx
+import { Avatar } from '@max-ui/components';
+// или
+import { AvatarCloseButton } from '@max-ui/components/avatar';
+```
 
-- Playground
+### 📋 Props
+| Prop | Тип | По умолчанию | Описание |
+|------|-----|--------------|----------|
+| `onClick` | `MouseEventHandler` | `undefined` | Обработчик клика |
+| Все props `<button>` | `ComponentProps<'button'>` | — | Стандартные HTML-атрибуты button |
+
+### 🎨 Примеры
+
+```tsx
+// Базовая кнопка закрытия
+<Avatar.Container
+  rightTopCorner={<Avatar.CloseButton aria-label="Закрыть" />}
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
+
+```tsx
+// С обработчиком клика
+<Avatar.Container
+  rightTopCorner={
+    <Avatar.CloseButton
+      aria-label="Удалить"
+      onClick={(e) => {
+        e.preventDefault();
+        console.log('Avatar removed');
+      }}
+    />
+  }
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
+
+```tsx
+// С разными размерами аватара
+<Avatar.Container size={32} rightTopCorner={<Avatar.CloseButton aria-label="Close" />}>
+  <Avatar.Icon><Icon16Placeholder /></Avatar.Icon>
+</Avatar.Container>
+<Avatar.Container size={64} rightTopCorner={<Avatar.CloseButton aria-label="Close" />}>
+  <Avatar.Icon><Icon24Placeholder /></Avatar.Icon>
+</Avatar.Container>
+<Avatar.Container size={96} rightTopCorner={<Avatar.CloseButton aria-label="Close" />}>
+  <Avatar.Icon><Icon24Placeholder /></Avatar.Icon>
+</Avatar.Container>
+```
+
+```tsx
+// В комбинации с OnlineDot
+<Avatar.Container
+  rightTopCorner={<Avatar.CloseButton aria-label="Закрыть" />}
+  rightBottomCorner={<Avatar.OnlineDot />}
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
+
+```tsx
+// С кастомными стилями
+<Avatar.Container
+  rightTopCorner={
+    <Avatar.CloseButton
+      aria-label="Закрыть"
+      className="custom-close-button"
+    />
+  }
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+</Avatar.Container>
+```
+
+### 🎨 CSS-переменные и классы
+
+**Классы:**
+- `.AvatarCloseButton` — корневой класс кнопки
+
+### 🔧 Типы TypeScript
+
+```ts
+interface AvatarCloseButtonProps extends ComponentProps<'button'> {}
+```
+
+### 📱 Особенности
+
+- **Автоматический размер иконки**: 4 размера (12, 16, 20, 24px) на основе размера контейнера
+- **Предотвращение клика**: `onClick` предотвращает стандартное поведение
+- **Контекст**: Использует `AvatarContainerContext` для определения размера
+- **SvgButton**: Основан на компоненте `SvgButton` для доступности
+
+### ⚠️ Важно
+
+- Всегда добавляйте `aria-label` для доступности
+- Должен использоваться внутри `Avatar.Container` для автоматического определения размера
+- Передаётся через prop `rightTopCorner`
+
+### 🔗 Связанные компоненты
+
+- [AvatarContainer](#-avatarcontainer)
+- [AvatarOnlineDot](#-avataronlinedot)
+- [SvgButton](#-svgbutton)
 
 ---
 
-## 📷 TypographyBody
+## 📚 Общие типы
 
-**Путь:** `source\max-ui\src\components\Typography\parts\TypographyBody`
+```ts
+// Размеры аватара
+type AvatarContainerSize = 16 | 20 | 24 | 28 | 32 | 36 | 40 | 44 | 48 | 54 | 56 | 64 | 72 | 80 | 88 | 96 | number;
 
-### Примеры (Stories)
+// Формы аватара
+type AvatarContainerFrom = 'circle' | 'squircle';
 
-- Playground
+// Градиенты для AvatarText
+type AvatarTextGradient = 'red' | 'orange' | 'green' | 'blue' | 'purple' | 'custom';
 
----
+// Ключи внутренних элементов
+type AvatarContainerElementKey = 'overlay' | 'content' | 'rightBottomCorner' | 'rightTopCorner';
 
-## 📷 TypographyDisplay
-
-**Путь:** `source\max-ui\src\components\Typography\parts\TypographyDisplay`
-
-### Примеры (Stories)
-
-- Playground
-
----
-
-## 📷 TypographyHeadline
-
-**Путь:** `source\max-ui\src\components\Typography\parts\TypographyHeadline`
-
-### Примеры (Stories)
-
-- Playground
-
----
-
-## 📷 TypographyLabel
-
-**Путь:** `source\max-ui\src\components\Typography\parts\TypographyLabel`
-
-### Примеры (Stories)
-
-- Playground
+// Props для всех компонентов Avatar
+interface AvatarCloseButtonProps extends ComponentProps<'button'> {}
+interface AvatarIconProps extends ComponentProps<'span'> {}
+interface AvatarImageProps extends ComponentProps<'img'> {
+  fallback?: ReactNode;
+  fallbackGradient?: AvatarTextGradient;
+}
+interface AvatarOnlineDotProps extends ComponentProps<'span'> {}
+interface AvatarOverlayProps extends ComponentProps<'span'> {}
+interface AvatarTextProps extends ComponentProps<'span'> {
+  gradient?: AvatarTextGradient;
+}
+```
 
 ---
 
-## 📷 TypographyTitle
-
-**Путь:** `source\max-ui\src\components\Typography\parts\TypographyTitle`
-
-### Примеры (Stories)
-
-- Playground
-
----
-
+*Документация сгенерирована автоматически из исходного кода MAX UI*
