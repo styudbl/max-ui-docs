@@ -1,0 +1,19 @@
+{
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "files.associations": {
+      "*.tsx": "typescriptreact",
+      "*.scss": "scss"
+    },
+    "markdown.preview.breakOnSingleNewline": false,
+    "markdown.preview.doubleClickToSwitchToEditor": false,
+    "markdown.styles": [
+      "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.min.css"
+    ],
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.defaultProfile.linux": "bash"
+  }
