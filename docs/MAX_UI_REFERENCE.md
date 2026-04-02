@@ -263,7 +263,7 @@ export interface AvatarGroupProps {
 import { Avatar } from '@maxhub/max-ui'
 
 // ❌ Пробелы в атрибутах
-<Avatar.Image src="https://..." alt="User" >
+<Avatar.Image src="https://..." alt="User" />
 
 // ❌ Нет фолбэка
 <Avatar>
@@ -524,7 +524,7 @@ export interface AvatarImageProps {
 ### ❌ Неправильно
 ```tsx
 // ❌ Пробел в атрибуте
-<Avatar.Image src="https://..." >
+<Avatar.Image src="https://..." />
 
 // ❌ Нет alt
 <Avatar.Image src="/avatar.jpg" />
@@ -1250,7 +1250,7 @@ export interface ButtonProps extends SlotProps {
 ### ❌ Неправильно
 ```tsx
 // ❌ Лишний пробел
-<Button variant="primary" >
+<Button variant="primary" />
 
 // ❌ Неправильный импорт
 import { Button } from '@maxhub/max-ui'
@@ -2749,7 +2749,7 @@ export interface ContainerProps extends SlotProps {
 import { Container } from '@maxhub/max-ui'
 
 // ❌ Лишний пробел
-<Container size="lg" >
+<Container size="lg" />
 ```
 
 ### 🔗 Связанные компоненты
@@ -3314,7 +3314,7 @@ export interface FlexProps extends SlotProps {
 import { Flex } from '@maxhub/max-ui'
 
 // ❌ Лишние пробелы
-<Flex justify="center" >
+<Flex justify="center" />
 ```
 
 ### 🔗 Связанные компоненты
@@ -3906,7 +3906,7 @@ export interface PanelProps extends SlotProps {
 import { Panel } from '@maxhub/max-ui'
 
 // ❌ Лишние пробелы
-<Panel variant="elevated" >
+<Panel variant="elevated" />
 ```
 
 ### 🔗 Связанные компоненты
